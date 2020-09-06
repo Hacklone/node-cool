@@ -1,0 +1,42 @@
+{
+  "name": "@node-cool/database",
+  "version": "1.0.0",
+  "description": "Cool - The coolest opinionated fully loaded node framework",
+  "scripts": {
+    "build": "../../node_modules/.bin/tsc --project ./tsconfig.package.json",
+    "build-watch": "npm run build -- --watch",
+    "prepublish": "rm -rf ./dist",
+    "postbuild": "cp package.json ./dist/package.json",
+    "test": "../../node_modules/.bin/jasmine"
+  },
+  "author": {
+    "email": "toakak@gmail.com",
+    "name": "Barna Toth",
+    "url": "https://github.com/Hacklone"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hacklone/node-cool.git"
+  },
+  "keywords": [
+    "node",
+    "framework",
+    "typeorm"
+  ],
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/Hacklone/node-cool/raw/master/LICENSE"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/Hacklone/node-cool/issues"
+  },
+  "homepage": "https://github.com/Hacklone/node-cool",
+  "dependencies": {
+    "@node-cool/core": "^1.0.1",
+    "typeorm": "^0.2.25"
+  },
+  "devDependencies": {}
+}

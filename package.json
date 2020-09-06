@@ -1,0 +1,39 @@
+{
+  "name": "cool-srcs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cool - The coolest opinionated fully loaded node framework",
+  "author": {
+    "email": "toakak@gmail.com",
+    "name": "Barna Toth",
+    "url": "https://github.com/Hacklone"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hacklone/node-cool.git"
+  },
+  "keywords": [
+    "node",
+    "framework",
+    "koa"
+  ],
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/Hacklone/node-cool/raw/master/LICENSE"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/Hacklone/node-cool/issues"
+  },
+  "homepage": "https://github.com/Hacklone/node-cool",
+  "dependencies": {
+    "typescript": "~4.0.2"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^3.5.14",
+    "@types/node": "^14.6.4",
+    "jasmine": "^3.6.1"
+  }
+}

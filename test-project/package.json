@@ -1,0 +1,23 @@
+{
+  "name": "cool-test-project",
+  "private": true,
+  "scripts": {
+    "build": "node_modules/.bin/tsc",
+    "build-watch": "npm run build -- --watch",
+    "prepublish": "rm -rf ./dist",
+    "postbuild": "cp package.json ./dist/package.json",
+    "start": "node main.js"
+  },
+  "engines": {
+    "node": "12"
+  },
+  "dependencies": {
+    "@node-cool/core": "^1.0.0",
+    "@node-cool/database": "^1.0.0",
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "tslib": "^2.0.1",
+    "typescript": "^4.0.2"
+  }
+}

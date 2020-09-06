@@ -1,0 +1,22 @@
+{
+  "name": "<% PROJECT_NAME %>",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node_modules/.bin/tsc",
+    "build-watch": "npm run build -- --watch",
+    "prepublish": "rm -rf ./dist",
+    "postbuild": "cp ./package.json ./dist/package.json && cp ./ormconfig.js ./dist/ormconfig.js",
+    "start": "node main.js"
+  },
+  "dependencies": {
+    "@node-cool/core": "^1.0.0",
+    "@node-cool/database": "^1.0.0",
+    "pg": "7.11.0",
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "tslib": "^2.0.1",
+    "typescript": "^4.0.2"
+  }
+}
