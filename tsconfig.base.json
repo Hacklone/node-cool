@@ -8,6 +8,7 @@
     "strictPropertyInitialization": true,
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": true,
     "moduleResolution": "node",
     "module": "commonjs",
     "target": "es5",

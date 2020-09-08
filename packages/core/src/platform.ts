@@ -1,4 +1,4 @@
-import { ReflectiveInjector, Provider, Injector } from 'injection-js';
+import { ReflectiveInjector, Provider } from 'injection-js';
 import { Server } from './server';
 import { CORE_MODULE_PROVIDERS } from './core.module';
 import { Logger } from './logger/logger.interface';
@@ -7,12 +7,13 @@ import { PROCESS, APPLICATION_MODULE_METADATA } from './injector/internal-inject
 import { LOGGER } from './injector/external-injection-tokens';
 
 class Platform {
-  public async bootstrapModuleAsync(applicationModule: any) {
+  public async bootstrapModuleAsync(applicationModule: unknown) {
     if (!applicationModule) {
       throw new Error('Please provide a module for bootstrapping!');
     }
 
-    const applicationModuleMetadata: CoolModuleConfiguration = Reflect.getMetadata(COOL_MODULE_METADATA_KEY, applicationModule);
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    const applicationModuleMetadata = <CoolModuleConfiguration>Reflect.getMetadata(COOL_MODULE_METADATA_KEY, <Object>applicationModule);
 
     if (!applicationModuleMetadata) {
       throw new Error('Cannot find CoolModule!');
@@ -27,13 +28,13 @@ class Platform {
 
     const serverModule = ReflectiveInjector.resolveAndCreate(providers);
 
-    const process: NodeJS.Process = serverModule.get(PROCESS);
+    const process = <NodeJS.Process>serverModule.get(PROCESS);
     if (!process) { throw new Error('nodejs process provider not found!'); }
 
-    const server: Server = serverModule.get(Server);
+    const server = <Server>serverModule.get(Server);
     if (!server) { throw new Error('Server provider not found!'); }
 
-    const logger: Logger = serverModule.get(LOGGER);
+    const logger = <Logger>serverModule.get(LOGGER);
     if (!logger) { throw new Error('LOGGER provider not found!'); }
 
     try {
@@ -63,7 +64,7 @@ class Platform {
     }
 
     for (const childModule of applicationModuleMetadata.imports) {
-      const childModuleMetadata: CoolModuleConfiguration = Reflect.getMetadata(COOL_MODULE_METADATA_KEY, childModule);
+      const childModuleMetadata = <CoolModuleConfiguration>Reflect.getMetadata(COOL_MODULE_METADATA_KEY, childModule);
 
       if (!childModuleMetadata) {
         throw new Error('Cannot find CoolModule!');
@@ -81,7 +82,8 @@ class Platform {
     });
   }
 
-  private _registerOnStopSignal(server: Server) {
+  private _registerOnStopSignal(server: Server): void {
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     process.on('SIGINT', async () => {
       let hasError = false;
 
@@ -96,6 +98,6 @@ class Platform {
   }
 }
 
-export const platform = () => {
+export const platform: () => Platform = () => {
   return new Platform();
 };

@@ -1,5 +1,6 @@
-import { Injectable, JsonController, Get } from '@node-cool/core';
+import { Injectable, JsonController, Get, Param } from '@node-cool/core';
 
+import { ExampleDTO } from './../../dto/entity.dto';
 import { ExampleService } from '../services/example.service';
 
 @Injectable()
@@ -9,8 +10,10 @@ export class ExampleController {
 
   }
 
-  @Get()
-  public async getExampleStatus() {
-    return this._exampleService.getExampleText();
+  @Get('/:exampleId([0-9]+)')
+  public async getExampleStatusAsync(@Param('exampleId') exampleId: string): Promise<ExampleDTO> {
+    const example = await this._exampleService.getExampleByIdAsync(exampleId);
+
+    return example.toDTO();
   }
 }

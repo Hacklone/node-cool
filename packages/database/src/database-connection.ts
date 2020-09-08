@@ -14,12 +14,8 @@ import {
 export class DatabaseConnection {
   private _connection: Connection | undefined;
 
-  public async connectAsync() {
-    const connectionOptions: any = await getConnectionOptions();
-
-    if (!connectionOptions.url) {
-      throw new Error('Missing URL for database');
-    }
+  public async connectAsync(): Promise<void> {
+    const connectionOptions = await getConnectionOptions();
 
     this._connection = await createConnection(connectionOptions);
   }
@@ -29,7 +25,7 @@ export class DatabaseConnection {
       throw new Error('Not connected to database');
     }
 
-    return this._connection.manager.getRepository(target);
+    return this._connection.manager.getRepository<Entity>(target);
   }
 
   public getRepositoryQueryBuilder<Entity>(target: ObjectType<Entity> | EntitySchema<Entity>, alias?: string): SelectQueryBuilder<Entity> {
@@ -37,7 +33,7 @@ export class DatabaseConnection {
       throw new Error('Not connected to database');
     }
 
-    return this.getRepository(target).createQueryBuilder(alias);
+    return this.getRepository<Entity>(target).createQueryBuilder(alias);
   }
 
   public getQueryBuilder<Entity>(entityName: string, alias: string): SelectQueryBuilder<Entity> {
@@ -53,10 +49,10 @@ export class DatabaseConnection {
       throw new Error('Not connected to database');
     }
 
-    return await this._connection.manager.transaction(runInTransaction);
+    return await this._connection.manager.transaction<T>(runInTransaction);
   }
 
-  public async disconnectAsync() {
+  public async disconnectAsync(): Promise<void> {
     if (!this._connection) {
       return;
     }

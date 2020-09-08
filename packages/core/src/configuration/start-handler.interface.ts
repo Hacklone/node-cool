@@ -1,3 +1,3 @@
 export interface StartHandler {
-  onStartAsync(app: any): Promise<void>;
+  onStartAsync(app: unknown): Promise<void>;
 }

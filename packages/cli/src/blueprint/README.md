@@ -1,4 +1,4 @@
-# <% PROJECT_NAME %>
+# ---project-name---
 
 ## Install
 

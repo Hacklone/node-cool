@@ -9,7 +9,7 @@ export class TestController {
   }
 
   @Get()
-  public async getTestStatus() {
-    return this._testService.getTestText();
+  public async getTestStatus(): Promise<string> {
+    return await this._testService.getTestTextAsync();
   }
 }

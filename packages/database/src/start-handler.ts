@@ -7,7 +7,7 @@ export class ServerStartHandler implements StartHandler {
 
   }
 
-  public async onStartAsync(app: any): Promise<void> {
+  public async onStartAsync(): Promise<void> {
     this._logger.verbose('Connecting to database');
 
     await this._databaseConnection.connectAsync();

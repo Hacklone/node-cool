@@ -2,7 +2,9 @@ import { Injectable } from '@node-cool/core';
 
 @Injectable()
 export class TestService {
-  public getTestText(): string {
-    return 'Test OK';
+  public getTestTextAsync(): Promise<string> {
+    return new Promise(resolve => {
+      setTimeout(() => { resolve('Test OK') } , 10);
+    });
   }
 }

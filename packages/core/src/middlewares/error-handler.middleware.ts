@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { KoaMiddlewareInterface, Middleware } from 'routing-controllers';
 import { Context } from 'koa';
 import { Injectable, Inject } from 'injection-js';
@@ -11,15 +13,15 @@ export class ErrorHandlerMiddleware implements KoaMiddlewareInterface {
   constructor(@Inject(LOGGER) private _logger: Logger) {
   }
 
-  async use(context: Context, next: (err?: Error) => Promise<any>): Promise<any> {
+  async use(context: Context, next: (err?: Error) => Promise<unknown>): Promise<void> {
     try {
       await next();
-    } catch (ex) {
-      if (ex.isApplicationError) {
-        context.body = { error: ex.message };
-        context.status = ex.statusCode;
+    } catch (err) {
+      if (err.isApplicationError) {
+        context.body = { error: err.message };
+        context.status = err.statusCode;
       } else {
-        this._logger.error(ex);
+        this._logger.error(err);
 
         context.body = { error: 'Internal error' };
         context.status = INTERNAL_SERVER_ERROR;

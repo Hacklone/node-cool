@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Command, flags } from '@oclif/command';
 import * as path from 'path';
 import * as vfs from 'vinyl-fs';
 import * as replace from 'gulp-replace';
-const map = require('map-stream');
+import map = require('map-stream');
 
 export default class New extends Command {
   public static description = 'Create new cool project';
@@ -17,7 +19,7 @@ export default class New extends Command {
     path: flags.string({ char: 'p', description: 'path where to create new project' }),
   };
 
-  public async run() {
+  public async run(): Promise<void> {
     const { flags } = this.parse(New);
 
     const projectName = flags.name || 'CoolProject';
@@ -34,15 +36,16 @@ export default class New extends Command {
     return new Promise((resolve, reject) => {
       const blueprintFolder = path.resolve(__dirname, '../blueprint');
 
-      vfs.src([blueprintFolder + '/**/*'])
-        .pipe(map((file: any, cb: Function) => {
+      vfs
+        .src([blueprintFolder + '/**/*'])
+        .pipe(map((file: { path: string }, cb: (error: Error | null, file: unknown) => void) => {
           console.log(file.path);
 
           cb(null, file);
         }))
-        .pipe(replace('<% PROJECT_NAME %>', projectName))
+        .pipe(replace('---project-name---', projectName))
         .pipe(vfs.dest(pathToGenerate))
-        .on('error', (err: any) => {
+        .on('error', (err: unknown) => {
           reject(err);
         })
         .on('end', () => {

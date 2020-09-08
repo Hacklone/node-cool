@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { ErrorHandlerMiddleware } from './middlewares/error-handler.middleware';
 import { BasicLogger } from './logger/basic-logger';
 import { Server } from './server';

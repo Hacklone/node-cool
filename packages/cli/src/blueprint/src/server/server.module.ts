@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { CoolModule } from '@node-cool/core';
 import { DatabaseModule } from '@node-cool/database';
 

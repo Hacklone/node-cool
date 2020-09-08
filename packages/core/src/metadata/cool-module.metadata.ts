@@ -7,7 +7,7 @@ export interface CoolModuleConfiguration {
   
   providers?: Provider[];
 
-  imports?: Type<any>[];
+  imports?: Type<unknown>[];
   
   globalMiddlewares?: Provider[];
 
@@ -20,8 +20,9 @@ export interface CoolModuleConfiguration {
   stopProviders?: Provider[];
 }
 
-export function CoolModule(configuration: CoolModuleConfiguration) {
-  return function (target: Function) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function CoolModule(configuration: CoolModuleConfiguration): (target: any) => void {
+  return function (target: () => unknown) {
     Reflect.defineMetadata(COOL_MODULE_METADATA_KEY, configuration, target);
   };
 }

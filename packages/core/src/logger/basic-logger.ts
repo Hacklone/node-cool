@@ -3,7 +3,7 @@ import { Injectable } from 'injection-js';
 
 @Injectable()
 export class BasicLogger implements Logger {
-  public verbose(message: string, data?: any): void {
+  public verbose(message: string, data?: unknown): void {
     console.log(`${ this._getTimeText() } ${ message }`);
 
     if (data) {
@@ -11,7 +11,7 @@ export class BasicLogger implements Logger {
     }
   }
 
-  public info(message: string, data?: any): void {
+  public info(message: string, data?: unknown): void {
     console.info(`${ this._getTimeText() } ${ message }`);
 
     if (data) {
@@ -19,7 +19,7 @@ export class BasicLogger implements Logger {
     }
   }
 
-  public error(error: Error, data?: any): void {
+  public error(error: Error, data?: unknown): void {
     console.error(`${ this._getTimeText() } ${ error.message }`);
 
     console.error(error);

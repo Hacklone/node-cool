@@ -6,11 +6,10 @@ import { Logger } from './logger/logger.interface';
 import { useContainer, useKoaServer } from 'routing-controllers';
 import { APPLICATION_MODULE_METADATA } from './injector/internal-injection-tokens';
 import * as Koa from 'koa';
+import * as koaCors from '@koa/cors';
 import * as http from 'http';
 import { LOGGER, ERROR_HANDLER_FACTORY } from './injector/external-injection-tokens';
 import { StopHandler } from './configuration/stop-handler.interface';
-
-const koaCors = require('@koa/cors');
 
 @Injectable()
 export class Server {
@@ -22,7 +21,7 @@ export class Server {
 
   }
 
-  public async startAsync() {
+  public async startAsync(): Promise<void> {
     this._logger.verbose(`Starting server on port: ${this._configuration.port}`);
 
     useContainer(this._serverModule);
@@ -40,7 +39,7 @@ export class Server {
     this._logger.verbose(`Server started`);
   }
 
-  public async stopAsync() {
+  public async stopAsync(): Promise<void> {
     this._logger.verbose('Stopping server');
 
     await this._invokeStopProvidersAsync();
@@ -49,6 +48,7 @@ export class Server {
   }
 
   private _startListening(app: Koa<Koa.DefaultState, Koa.DefaultContext>) {
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     http.createServer(app.callback()).listen(this._configuration.port);
 
     this._logger.verbose(`Listening started on port: ${this._configuration.port}`);
@@ -62,7 +62,7 @@ export class Server {
     this._logger.verbose('Invoking start providers');
 
     for (const provider of this._applicationMetadata.startProviders) {
-      const providerInstance: StartHandler = this._serverModule.get(provider);
+      const providerInstance = <StartHandler>this._serverModule.get(provider);
 
       if (!providerInstance.onStartAsync) {
         throw new Error('No onStartAsync() function found');
@@ -80,7 +80,7 @@ export class Server {
     this._logger.verbose('Invoking stop providers');
 
     for (const provider of this._applicationMetadata.stopProviders) {
-      const providerInstance: StopHandler = this._serverModule.get(provider);
+      const providerInstance = <StopHandler>this._serverModule.get(provider);
 
       if (!providerInstance.onStopAsync) {
         throw new Error('No onStopAsync() function found');
@@ -91,10 +91,10 @@ export class Server {
   }
 
   private _configureServer(app: Koa<Koa.DefaultState, Koa.DefaultContext>) {
-    let controllers: Function[] = [];
+    let controllers: Provider[] = [];
 
     if (this._applicationMetadata.controllers) {
-      controllers = controllers.concat(<Function[]>this._applicationMetadata.controllers);
+      controllers = controllers.concat(this._applicationMetadata.controllers);
     }
 
     let middlewares: Provider[] = [
@@ -107,15 +107,17 @@ export class Server {
 
     app = useKoaServer(app, {
       routePrefix: '/api',
-      controllers: controllers,
-      middlewares: <Function[]>middlewares,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      controllers: <any[]>controllers,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      middlewares: <any[]>middlewares,
       defaultErrorHandler: false,
     });
 
     return app;
   }
 
-  private _tryAddCORSMiddleware(app: any) {
+  private _tryAddCORSMiddleware(app: Koa) {
     if (!this._configuration.crossOrigin.enabled) {
       return;
     }
@@ -123,9 +125,12 @@ export class Server {
     this._logger.verbose('Adding Cross Origin Domains');
 
     app.use(koaCors({
-      origin: (request: any) => {
-        if (this._configuration.crossOrigin.domains.includes(request.headers.origin)) {
-          return request.headers.origin;
+      origin: (request: Koa.Context) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        const origin = <string>request?.headers?.origin;
+
+        if (this._configuration.crossOrigin.domains.includes(origin)) {
+          return origin;
         }
 
         return this._configuration.crossOrigin.domains[0];
