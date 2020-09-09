@@ -1,10 +1,10 @@
 {
   "name": "@node-cool/cli",
   "description": "Cool server framework CLI",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Barna Toth",
   "bin": {
-    "cool": "./bin/run"
+    "node-cool": "./bin/run"
   },
   "bugs": "https://github.com/Hacklone/node-cool/issues",
   "dependencies": {
@@ -42,7 +42,7 @@
   "main": "lib/index.js",
   "oclif": {
     "commands": "./lib/commands",
-    "bin": "cool",
+    "bin": "node-cool",
     "plugins": [
       "@oclif/plugin-help"
     ]

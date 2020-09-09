@@ -1,69 +1,39 @@
-# Cool - The coolest opinionated fully loaded node framework
+# @node-cool - The coolest opinionated fully loaded node framework
 
 [![NPM version][npm-image]][npm-url]
 
-An opinionated ready-to-go node server framework built with:
-- [TypeScript](https://www.npmjs.com/package/typescript)
-- [injection-js](https://www.npmjs.com/package/injection-js)
-- [Koa.js](https://www.npmjs.com/package/koa)
-- [routing-controllers](https://www.npmjs.com/package/routing-controllers)
-- [TypeORM](https://www.npmjs.com/package/typeorm)
+@node-cool is an opinionated node server framework with the goal to give all the tools out-of-the-box needed for building a modern web server application.
 
-## Usage
+## Main features
 
-### Install CLI
+- CLI
+- Build pipeline
+- Type Safety
+- IoC Container
+- MVC controllers
+- Database ORM
+- Linting
+- Code Formatting
 
-> npm i -g @node-cool/cli
+### Coming soon
+- Testing pipeline
+- Authentication & Session management
+- Google, Facebook authentication
+- Email based authentication
+- Password based authentication
+- Authorization framework
 
-### Create project
+## Quickstart
 
-> cool new --name <project name>
+[Get started in 5 minutes](https://hacklone.github.io/node-cool/#/getting-started/quick-start)
 
-### Build project
+## Learn
 
-> npm i
+[Learn more](https://hacklone.github.io/node-cool)
 
-> npm run build
+## Want to help?
 
-### Run server
-
-> cd dist && npm start
-
-## Examples
-
-### Create a controller
-
-./src/controllers/my-new-controller.controller.ts
-```typescript
-import { Injectable, JsonController, Get } from '@node-cool/core';
-
-@Injectable()
-@JsonController('/example')
-export class ExampleController {
-  @Get()
-  public async getExampleStatus() {
-    return { message: 'This is my response' };
-  }
-}
-```
-
-./src/server.module.ts
-```typescript
-import { CoolModule } from '@node-cool/core';
-
-import { ExampleController } from './controllers/example.controller';
-
-@CoolModule({
-  controllers: [
-    ExampleController,
-  ],
-})
-export class ServerModule {
-
-}
-```
-
-Additional information on how to write Controllers: https://www.npmjs.com/package/routing-controllers
+We welcome all ideas and code contributions.
 
 [npm-url]: https://www.npmjs.com/package/@node-cool/core
 [npm-image]: http://img.shields.io/npm/v/@node-cool/core.svg

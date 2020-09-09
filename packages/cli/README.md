@@ -16,13 +16,13 @@ Cool server framework CLI
 <!-- usage -->
 ```sh-session
 $ npm install -g @node-cool/cli
-$ cool COMMAND
+$ node-cool COMMAND
 running command...
-$ cool (-v|--version|version)
+$ node-cool (-v|--version|version)
 @node-cool/cli/1.0.0 darwin-x64 node-v12.13.1
-$ cool --help [COMMAND]
+$ node-cool --help [COMMAND]
 USAGE
-  $ cool COMMAND
+  $ node-cool COMMAND
 ...
 ```
 <!-- usagestop -->
@@ -37,7 +37,7 @@ display help for cool
 
 ```
 USAGE
-  $ cool help [COMMAND]
+  $ node-cool help [COMMAND]
 
 ARGUMENTS
   COMMAND  command to show help for
@@ -54,7 +54,7 @@ Create new cool project
 
 ```
 USAGE
-  $ cool new
+  $ node-cool new
 
 OPTIONS
   -h, --help       show CLI help
@@ -62,7 +62,7 @@ OPTIONS
   -p, --path=path  path where to create new project
 
 EXAMPLE
-  $ cool new --name my-project
+  $ node-cool new --name my-project
 ```
 
 _See code: [src/commands/new.ts](https://github.com/Hacklone/node-cool/blob/v1.0.0/src/commands/new.ts)_
