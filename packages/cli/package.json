@@ -1,7 +1,7 @@
 {
   "name": "@node-cool/cli",
   "description": "Cool server framework CLI",
-  "version": "1.0.3",
+  "version": "1.0.9",
   "author": "Barna Toth",
   "bin": {
     "node-cool": "./bin/run"
@@ -50,8 +50,7 @@
   "repository": "Hacklone/node-cool",
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
-    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "prepare": "rm -rf src/blueprint/node_modules",
+    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme && rm -rf ./src/blueprint/node_modules && cp -R ./src/blueprint ./lib/blueprint",
     "test": "echo NO TESTS",
     "version": "oclif-dev readme && git add README.md"
   },

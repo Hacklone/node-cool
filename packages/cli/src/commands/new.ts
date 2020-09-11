@@ -44,10 +44,10 @@ export default class New extends Command {
       const blueprintFolder = path.resolve(__dirname, '../blueprint');
 
       vfs
-        .src([blueprintFolder + '/**/*'])
+        .src([blueprintFolder + '/**/*', blueprintFolder + '/**/.*'])
         .pipe(
           map((file: { path: string }, cb: (error: Error | null, file: unknown) => void) => {
-            this.log(`\t\t${file.path}`);
+            this.log(`\t\t${path.basename(file.path)}`);
 
             cb(null, file);
           }),
@@ -72,7 +72,7 @@ export default class New extends Command {
       this.log('Install npm dependencies');
 
       childProcess
-        .spawn('npm install', {
+        .spawn('npm', ['install'], {
           cwd: pathToGenerate,
         })
         .on('exit', code => {
