@@ -6,9 +6,7 @@ import { ExampleService } from '../services/example.service';
 @Injectable()
 @JsonController('/example')
 export class ExampleController {
-  constructor(private _exampleService: ExampleService) {
-
-  }
+  constructor(private _exampleService: ExampleService) {}
 
   @Get('/:exampleId([0-9]+)')
   public async getExampleStatusAsync(@Param('exampleId') exampleId: string): Promise<ExampleDTO> {

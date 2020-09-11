@@ -1,5 +1,4 @@
-@node-cool/cli
-=========
+# @node-cool/cli
 
 Cool server framework CLI
 
@@ -9,11 +8,15 @@ Cool server framework CLI
 [![License](https://img.shields.io/npm/l/@node-cool/cli.svg)](https://github.com/Hacklone/node-cool/blob/master/package.json)
 
 <!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
+
+- [Usage](#usage)
+- [Commands](#commands)
 <!-- tocstop -->
+
 # Usage
+
 <!-- usage -->
+
 ```sh-session
 $ npm install -g @node-cool/cli
 $ node-cool COMMAND
@@ -25,11 +28,15 @@ USAGE
   $ node-cool COMMAND
 ...
 ```
+
 <!-- usagestop -->
+
 # Commands
+
 <!-- commands -->
-* [`cool help [COMMAND]`](#cool-help-command)
-* [`cool new`](#cool-new)
+
+- [`cool help [COMMAND]`](#cool-help-command)
+- [`cool new`](#cool-new)
 
 ## `cool help [COMMAND]`
 
@@ -66,4 +73,5 @@ EXAMPLE
 ```
 
 _See code: [src/commands/new.ts](https://github.com/Hacklone/node-cool/blob/v1.0.0/src/commands/new.ts)_
+
 <!-- commandsstop -->

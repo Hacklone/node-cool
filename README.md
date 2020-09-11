@@ -16,6 +16,7 @@
 - Code Formatting
 
 ### Coming soon
+
 - Testing pipeline
 - Authentication & Session management
 - Google, Facebook authentication

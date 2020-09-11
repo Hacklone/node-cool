@@ -4,11 +4,11 @@ export const COOL_MODULE_METADATA_KEY = 'CoolModule';
 
 export interface CoolModuleConfiguration {
   controllers?: Provider[];
-  
+
   providers?: Provider[];
 
   imports?: Type<unknown>[];
-  
+
   globalMiddlewares?: Provider[];
 
   configuration?: {
@@ -16,7 +16,7 @@ export interface CoolModuleConfiguration {
   };
 
   startProviders?: Provider[];
-  
+
   stopProviders?: Provider[];
 }
 

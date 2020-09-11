@@ -6,19 +6,9 @@ import { ExampleController } from './controllers/example.controller';
 import { ExampleService } from './services/example.service';
 
 @CoolModule({
-  controllers: [
-    ExampleController,
-  ],
-  providers: [
-    ExampleService,
-  ],
-  imports: [
-    DatabaseModule,
-  ],
-  configuration: {
-
-  },
+  controllers: [ExampleController],
+  providers: [ExampleService],
+  imports: [DatabaseModule],
+  configuration: {},
 })
-export class ServerModule {
-
-}
+export class ServerModule {}

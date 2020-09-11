@@ -1,3 +1,3 @@
 import { KoaMiddlewareInterface } from 'routing-controllers';
 
-export type CoolMiddleware = KoaMiddlewareInterface
+export type CoolMiddleware = KoaMiddlewareInterface;

@@ -4,16 +4,8 @@ import { CoolModule } from '@node-cool/core';
 import { TestService } from './services/test.service';
 
 @CoolModule({
-  controllers: [
-    TestController,
-  ],
-  globalMiddlewares: [
-    TestMiddleware,
-  ],
-  providers: [
-    TestService,
-  ],
+  controllers: [TestController],
+  globalMiddlewares: [TestMiddleware],
+  providers: [TestService],
 })
-export class ServerModule {
-
-}
+export class ServerModule {}

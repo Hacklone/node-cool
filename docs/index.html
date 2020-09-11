@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>@node-cool</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="The coolest opinionated fully loaded framework for node" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <title>@node-cool</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="description" content="The coolest opinionated fully loaded framework for node">
-  <meta name="viewport"
-    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
-</head>
-
-<body>
-  <div id="app">Loading...</div>
-  <script>
-    window.$docsify = {
-      name: '@node-cool',
-      repo: 'https://github.com/Hacklone/node-cool',
-      ga: 'UA-177654840-1',
-      logo: '/_media/icon.svg',
-      homepage: 'home.md',
-      loadSidebar: true,
-      autoHeader: true,
-      subMaxLevel: 2,
-      auto2top: true,
-      search: {
-        placeholder: 'Type to search'
-      },
-      footer: {
-        copy: `
+  <body>
+    <div id="app">Loading...</div>
+    <script>
+      window.$docsify = {
+        name: '@node-cool',
+        repo: 'https://github.com/Hacklone/node-cool',
+        ga: 'UA-177654840-1',
+        logo: '/_media/icon.svg',
+        homepage: 'home.md',
+        loadSidebar: true,
+        autoHeader: true,
+        subMaxLevel: 2,
+        auto2top: true,
+        search: {
+          placeholder: 'Type to search',
+        },
+        footer: {
+          copy: `
           <div style="text-align: left; margin-bottom: 1rem">
             @node-cool &copy; 2020
           </div>
         `,
-        auth: `
+          auth: `
           <div style="display: flex; flex-direction: row; width: 100%">
             <div style="flex: 1; text-align: left;">
               by <a href="https://github.com/Hacklone" target="_blank">Barna Toth</a>
@@ -44,26 +45,25 @@
             </div>
           </div>
         `,
-        pre: '<hr style="margin-top: 5rem"/>',
-        post: '',
-        style: 'text-align: right;'
-      },
-      share: {
-        reddit: true,
-        linkedin: true,
-        facebook: true,
-        twitter: true,
-        whatsapp: true,
-        telegram: true,
-      }
-    }
-  </script>
-  <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/ga.min.js"></script>
-  <script src="//unpkg.com/docsify-footer-enh/dist/docsify-footer-enh.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
-  <script src="//unpkg.com/docsify-share/build/index.min.js"></script>
-</body>
-
+          pre: '<hr style="margin-top: 5rem"/>',
+          post: '',
+          style: 'text-align: right;',
+        },
+        share: {
+          reddit: true,
+          linkedin: true,
+          facebook: true,
+          twitter: true,
+          whatsapp: true,
+          telegram: true,
+        },
+      };
+    </script>
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/ga.min.js"></script>
+    <script src="//unpkg.com/docsify-footer-enh/dist/docsify-footer-enh.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+    <script src="//unpkg.com/docsify-share/build/index.min.js"></script>
+  </body>
 </html>

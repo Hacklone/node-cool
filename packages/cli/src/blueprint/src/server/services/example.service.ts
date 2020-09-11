@@ -5,16 +5,13 @@ import { ExampleEntity } from './../../entities/example.entity';
 
 @Injectable()
 export class ExampleService {
-  constructor(private _databaseConnection: DatabaseConnection) {
-
-  }
+  constructor(private _databaseConnection: DatabaseConnection) {}
 
   public async getExampleByIdAsync(exampleId: string): Promise<ExampleEntity> {
-    return await this._databaseConnection.getRepository(ExampleEntity)
-      .findOne({
-        where: {
-          id: exampleId,
-        },
-      });
+    return await this._databaseConnection.getRepository(ExampleEntity).findOne({
+      where: {
+        id: exampleId,
+      },
+    });
   }
 }

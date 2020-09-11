@@ -12,12 +12,8 @@
     "moduleResolution": "node",
     "module": "commonjs",
     "target": "es5",
-    "types": [
-      "node",
-    ],
-    "lib": [
-      "es2020",
-    ],
+    "types": ["node"],
+    "lib": ["es2020"],
     "skipLibCheck": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,

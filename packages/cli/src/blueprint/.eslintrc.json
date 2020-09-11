@@ -2,14 +2,9 @@
   "root": true,
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": [
-      "./tsconfig.eslint.json"
-    ]
+    "project": ["./tsconfig.eslint.json"]
   },
-  "plugins": [
-    "@typescript-eslint",
-    "unused-imports"
-  ],
+  "plugins": ["@typescript-eslint", "unused-imports"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -20,12 +15,7 @@
     "node": true,
     "es6": true
   },
-  "ignorePatterns": [
-    "**/node_modules",
-    "**/dist",
-    "packages/cli/bin",
-    "packages/cli/lib"
-  ],
+  "ignorePatterns": ["**/node_modules", "**/dist", "packages/cli/bin", "packages/cli/lib"],
   "rules": {
     "@typescript-eslint/no-explicit-any": ["error", { "fixToUnknown": true }],
     "@typescript-eslint/explicit-module-boundary-types": ["error"],

@@ -1,3 +1,10 @@
+.DS_STORE
+
+dist/
+*.log
 node_modules
 
-dist
+npm-debug.log
+yarn-error.log
+
+.eslintcache

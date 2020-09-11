@@ -4,7 +4,7 @@
 
 Install the `@node-cool/cli` package globally. With the CLI you'll be able to generate a `@node-cool` project quickly.
 
-``` terminal
+```terminal
 $ npm i -g @node-cool/cli
 ```
 
@@ -12,7 +12,7 @@ $ npm i -g @node-cool/cli
 
 Create a new project with the CLI.
 
-``` terminal
+```terminal
 $ node-cool new --name <project name>
 ```
 
@@ -22,7 +22,7 @@ This will generate a ready-to-go `@node-cool` project with example code in it.
 
 Once you've generated the project simply build it with the following command.
 
-``` terminal
+```terminal
 $ npm run build
 ```
 
@@ -30,8 +30,7 @@ $ npm run build
 
 You can run your server with the following command.
 
-``` terminal
+```terminal
 $ cd dist
 $ npm start
 ```
-

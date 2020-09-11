@@ -11,12 +11,8 @@
     "moduleResolution": "node",
     "module": "commonjs",
     "target": "es2015",
-    "types": [
-      "node",
-    ],
-    "lib": [
-      "es2020",
-    ],
+    "types": ["node"],
+    "lib": ["es2020"],
     "skipLibCheck": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -26,7 +22,5 @@
     "outDir": "dist",
     "baseUrl": "."
   },
-  "files": [
-    "./src/main.ts"
-  ]
+  "files": ["./src/main.ts"]
 }

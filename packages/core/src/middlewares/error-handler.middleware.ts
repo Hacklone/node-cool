@@ -10,8 +10,7 @@ import { LOGGER } from '../injector/external-injection-tokens';
 @Injectable()
 @Middleware({ type: 'before' })
 export class ErrorHandlerMiddleware implements KoaMiddlewareInterface {
-  constructor(@Inject(LOGGER) private _logger: Logger) {
-  }
+  constructor(@Inject(LOGGER) private _logger: Logger) {}
 
   async use(context: Context, next: (err?: Error) => Promise<unknown>): Promise<void> {
     try {

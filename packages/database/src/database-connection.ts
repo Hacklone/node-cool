@@ -28,7 +28,10 @@ export class DatabaseConnection {
     return this._connection.manager.getRepository<Entity>(target);
   }
 
-  public getRepositoryQueryBuilder<Entity>(target: ObjectType<Entity> | EntitySchema<Entity>, alias?: string): SelectQueryBuilder<Entity> {
+  public getRepositoryQueryBuilder<Entity>(
+    target: ObjectType<Entity> | EntitySchema<Entity>,
+    alias?: string,
+  ): SelectQueryBuilder<Entity> {
     if (!this._connection) {
       throw new Error('Not connected to database');
     }

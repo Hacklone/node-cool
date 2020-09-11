@@ -12,8 +12,8 @@ class Platform {
       throw new Error('Please provide a module for bootstrapping!');
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    const applicationModuleMetadata = <CoolModuleConfiguration>Reflect.getMetadata(COOL_MODULE_METADATA_KEY, <Object>applicationModule);
+    const applicationModuleMetadata = <CoolModuleConfiguration>// eslint-disable-next-line @typescript-eslint/ban-types
+    Reflect.getMetadata(COOL_MODULE_METADATA_KEY, <Object>applicationModule);
 
     if (!applicationModuleMetadata) {
       throw new Error('Cannot find CoolModule!');
@@ -21,7 +21,10 @@ class Platform {
 
     const providers = [
       ...CORE_MODULE_PROVIDERS,
-      { provide: APPLICATION_MODULE_METADATA, useValue: applicationModuleMetadata },
+      {
+        provide: APPLICATION_MODULE_METADATA,
+        useValue: applicationModuleMetadata,
+      },
     ];
 
     this._collectProvidersRecursively(applicationModuleMetadata, providers);
@@ -29,13 +32,19 @@ class Platform {
     const serverModule = ReflectiveInjector.resolveAndCreate(providers);
 
     const process = <NodeJS.Process>serverModule.get(PROCESS);
-    if (!process) { throw new Error('nodejs process provider not found!'); }
+    if (!process) {
+      throw new Error('nodejs process provider not found!');
+    }
 
     const server = <Server>serverModule.get(Server);
-    if (!server) { throw new Error('Server provider not found!'); }
+    if (!server) {
+      throw new Error('Server provider not found!');
+    }
 
     const logger = <Logger>serverModule.get(LOGGER);
-    if (!logger) { throw new Error('LOGGER provider not found!'); }
+    if (!logger) {
+      throw new Error('LOGGER provider not found!');
+    }
 
     try {
       this._registerOnUnhandledRejections(logger);

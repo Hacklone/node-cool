@@ -13,13 +13,14 @@ import { StopHandler } from './configuration/stop-handler.interface';
 
 @Injectable()
 export class Server {
-  constructor(@Inject(LOGGER) private _logger: Logger,
-    @Inject(APPLICATION_MODULE_METADATA) private _applicationMetadata: CoolModuleConfiguration,
+  constructor(
+    @Inject(LOGGER) private _logger: Logger,
+    @Inject(APPLICATION_MODULE_METADATA)
+    private _applicationMetadata: CoolModuleConfiguration,
     @Inject(ERROR_HANDLER_FACTORY) private _errorHandlerFactory: () => Provider,
     private _configuration: Configuration,
-    private _serverModule: Injector) {
-
-  }
+    private _serverModule: Injector,
+  ) {}
 
   public async startAsync(): Promise<void> {
     this._logger.verbose(`Starting server on port: ${this._configuration.port}`);
@@ -97,9 +98,7 @@ export class Server {
       controllers = controllers.concat(this._applicationMetadata.controllers);
     }
 
-    let middlewares: Provider[] = [
-      this._errorHandlerFactory(),
-    ];
+    let middlewares: Provider[] = [this._errorHandlerFactory()];
 
     if (this._applicationMetadata.globalMiddlewares) {
       middlewares = middlewares.concat(this._applicationMetadata.globalMiddlewares);
@@ -124,17 +123,19 @@ export class Server {
 
     this._logger.verbose('Adding Cross Origin Domains');
 
-    app.use(koaCors({
-      origin: (request: Koa.Context) => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        const origin = <string>request?.headers?.origin;
+    app.use(
+      koaCors({
+        origin: (request: Koa.Context) => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+          const origin = <string>request?.headers?.origin;
 
-        if (this._configuration.crossOrigin.domains.includes(origin)) {
-          return origin;
-        }
+          if (this._configuration.crossOrigin.domains.includes(origin)) {
+            return origin;
+          }
 
-        return this._configuration.crossOrigin.domains[0];
-      },
-    }));
+          return this._configuration.crossOrigin.domains[0];
+        },
+      }),
+    );
   }
 }

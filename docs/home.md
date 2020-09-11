@@ -15,6 +15,7 @@
 - Code formatting
 
 ### Coming soon
+
 - Authentication & Session management
 - Google, Facebook authentication
 - Email based authentication
@@ -23,15 +24,15 @@
 
 ## Technologies
 
-| Feature | Package | Technology |
-|------------|----------|-----------|
-| Type Safety | @node-cool/core | [TypeScript](https://www.npmjs.com/package/typescript) |
-| IoC Container | @node-cool/core | [injection-js](https://www.npmjs.com/package/injection-js) |
-| node framework | @node-cool/core | [Koa.js](https://www.npmjs.com/package/koa) |
-| MVC controllers | @node-cool/core | [routing-controllers](https://www.npmjs.com/package/routing-controllers) |
-| Database ORM | @node-cool/database | [TypeORM](https://www.npmjs.com/package/typeorm) |
-| Code Linting | @node-cool/cli | [ESLint](https://www.npmjs.com/package/eslint) |
-| Code Formatting | @node-cool/cli | [Prettier](https://www.npmjs.com/package/prettier) |
+| Feature         | Package             | Technology                                                               |
+| --------------- | ------------------- | ------------------------------------------------------------------------ |
+| Type Safety     | @node-cool/core     | [TypeScript](https://www.npmjs.com/package/typescript)                   |
+| IoC Container   | @node-cool/core     | [injection-js](https://www.npmjs.com/package/injection-js)               |
+| node framework  | @node-cool/core     | [Koa.js](https://www.npmjs.com/package/koa)                              |
+| MVC controllers | @node-cool/core     | [routing-controllers](https://www.npmjs.com/package/routing-controllers) |
+| Database ORM    | @node-cool/database | [TypeORM](https://www.npmjs.com/package/typeorm)                         |
+| Code Linting    | @node-cool/cli      | [ESLint](https://www.npmjs.com/package/eslint)                           |
+| Code Formatting | @node-cool/cli      | [Prettier](https://www.npmjs.com/package/prettier)                       |
 
 ## [Get started](/getting-started/quick-start.md)
 

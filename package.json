@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Cool - The coolest opinionated fully loaded node framework",
-  "scripts": {
-  },
+  "scripts": {},
   "author": {
     "email": "toakak@gmail.com",
     "name": "Barna Toth",
@@ -47,7 +46,7 @@
   },
   "husky": {
     "hooks": {
-      
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {

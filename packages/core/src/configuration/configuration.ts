@@ -4,10 +4,11 @@ import { PROCESS, APPLICATION_MODULE_METADATA } from '../injector/internal-injec
 
 @Injectable()
 export class Configuration {
-  constructor(@Inject(PROCESS) private _process: NodeJS.Process,
-    @Inject(APPLICATION_MODULE_METADATA) private _applicationModuleMetadata: CoolModuleConfiguration) {
-
-  }
+  constructor(
+    @Inject(PROCESS) private _process: NodeJS.Process,
+    @Inject(APPLICATION_MODULE_METADATA)
+    private _applicationModuleMetadata: CoolModuleConfiguration,
+  ) {}
 
   public port: number = (this._process.env.PORT && +this._process.env.PORT) || 2000;
 

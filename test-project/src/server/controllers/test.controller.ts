@@ -4,9 +4,7 @@ import { Injectable, JsonController, Get } from '@node-cool/core';
 @Injectable()
 @JsonController('/test')
 export class TestController {
-  constructor(private _testService: TestService) {
-
-  }
+  constructor(private _testService: TestService) {}
 
   @Get()
   public async getTestStatus(): Promise<string> {

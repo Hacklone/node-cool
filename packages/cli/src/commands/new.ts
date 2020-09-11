@@ -10,14 +10,15 @@ import map = require('map-stream');
 export default class New extends Command {
   public static description = 'Create new @node-cool project';
 
-  public static examples = [
-    `$ node-cool new --name my-project`,
-  ];
+  public static examples = [`$ node-cool new --name my-project`];
 
   public static flags = {
     help: flags.help({ char: 'h' }),
     name: flags.string({ char: 'n', description: 'name of the project' }),
-    path: flags.string({ char: 'p', description: 'path where to create new project' }),
+    path: flags.string({
+      char: 'p',
+      description: 'path where to create new project',
+    }),
   };
 
   public async run(): Promise<void> {
@@ -43,11 +44,13 @@ export default class New extends Command {
 
       vfs
         .src([blueprintFolder + '/**/*'])
-        .pipe(map((file: { path: string }, cb: (error: Error | null, file: unknown) => void) => {
-          this.log(`\t\t${file.path}`);
+        .pipe(
+          map((file: { path: string }, cb: (error: Error | null, file: unknown) => void) => {
+            this.log(`\t\t${file.path}`);
 
-          cb(null, file);
-        }))
+            cb(null, file);
+          }),
+        )
         .pipe(replace('---project-name---', projectName))
         .pipe(vfs.dest(pathToGenerate))
         .on('error', (err: unknown) => {
@@ -67,10 +70,11 @@ export default class New extends Command {
     return new Promise((resolve, reject) => {
       this.log('Install npm dependencies');
 
-      childProcess.spawn('npm install', {
-        cwd: pathToGenerate,
-      })
-        .on('exit', (code) => {
+      childProcess
+        .spawn('npm install', {
+          cwd: pathToGenerate,
+        })
+        .on('exit', code => {
           if (code) {
             this.error('Installing npm dependencies failed');
 
@@ -80,7 +84,7 @@ export default class New extends Command {
 
             resolve();
           }
-        });      
-    });  
+        });
+    });
   }
 }
