@@ -9,6 +9,7 @@ Cool server framework CLI
 
 <!-- toc -->
 
+- [@node-cool/cli](#node-coolcli)
 - [Usage](#usage)
 - [Commands](#commands)
 <!-- tocstop -->
@@ -22,7 +23,7 @@ $ npm install -g @node-cool/cli
 $ node-cool COMMAND
 running command...
 $ node-cool (-v|--version|version)
-@node-cool/cli/1.0.0 darwin-x64 node-v12.13.1
+@node-cool/cli/1.0.3 darwin-x64 node-v12.13.1
 $ node-cool --help [COMMAND]
 USAGE
   $ node-cool COMMAND
@@ -35,12 +36,12 @@ USAGE
 
 <!-- commands -->
 
-- [`cool help [COMMAND]`](#cool-help-command)
-- [`cool new`](#cool-new)
+- [`node-cool help [COMMAND]`](#node-cool-help-command)
+- [`node-cool new`](#node-cool-new)
 
-## `cool help [COMMAND]`
+## `node-cool help [COMMAND]`
 
-display help for cool
+display help for node-cool
 
 ```
 USAGE
@@ -55,9 +56,9 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
 
-## `cool new`
+## `node-cool new`
 
-Create new cool project
+Create new @node-cool project
 
 ```
 USAGE
@@ -72,6 +73,6 @@ EXAMPLE
   $ node-cool new --name my-project
 ```
 
-_See code: [src/commands/new.ts](https://github.com/Hacklone/node-cool/blob/v1.0.0/src/commands/new.ts)_
+_See code: [src/commands/new.ts](https://github.com/Hacklone/node-cool/blob/v1.0.3/src/commands/new.ts)_
 
 <!-- commandsstop -->

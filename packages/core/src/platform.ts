@@ -12,8 +12,9 @@ class Platform {
       throw new Error('Please provide a module for bootstrapping!');
     }
 
-    const applicationModuleMetadata = <CoolModuleConfiguration>// eslint-disable-next-line @typescript-eslint/ban-types
-    Reflect.getMetadata(COOL_MODULE_METADATA_KEY, <Object>applicationModule);
+    const applicationModuleMetadata = <
+      CoolModuleConfiguration // eslint-disable-next-line @typescript-eslint/ban-types
+    >Reflect.getMetadata(COOL_MODULE_METADATA_KEY, <Object>applicationModule);
 
     if (!applicationModuleMetadata) {
       throw new Error('Cannot find CoolModule!');

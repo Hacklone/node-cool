@@ -5,7 +5,8 @@ import * as path from 'path';
 import * as vfs from 'vinyl-fs';
 import * as replace from 'gulp-replace';
 import * as childProcess from 'child_process';
-import map = require('map-stream');
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
+const map = require('map-stream');
 
 export default class New extends Command {
   public static description = 'Create new @node-cool project';

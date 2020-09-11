@@ -1,6 +1,6 @@
 {
   "name": "@node-cool/database",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Cool - The coolest opinionated fully loaded node framework",
   "scripts": {
     "build": "../../node_modules/.bin/tsc --project ./tsconfig.package.json",
