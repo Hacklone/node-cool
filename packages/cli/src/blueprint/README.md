@@ -10,10 +10,6 @@
 
 The build output will be copied to the `./dist` folder
 
-### Continuous build
-
-> npm run build-watch
-
 ## Run server
 
 > cd ./dist

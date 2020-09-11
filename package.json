@@ -4,7 +4,6 @@
   "private": true,
   "description": "Cool - The coolest opinionated fully loaded node framework",
   "scripts": {
-    "format-code": "./node_modules/.bin/eslint . --fix --ext .js,.ts"
   },
   "author": {
     "email": "toakak@gmail.com",
@@ -38,14 +37,21 @@
     "@typescript-eslint/eslint-plugin": "^4.1.0",
     "@typescript-eslint/parser": "^4.1.0",
     "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-unused-imports": "^0.1.3",
     "husky": "^4.3.0",
     "jasmine": "^3.6.1",
+    "lint-staged": "^10.3.0",
+    "prettier": "2.1.1",
     "typescript": "^4.0.2"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run format-code"
+      
     }
+  },
+  "lint-staged": {
+    "*.{js,ts}": "eslint --cache --fix",
+    "*.{js,ts,md,json}": "prettier --write"
   }
 }
