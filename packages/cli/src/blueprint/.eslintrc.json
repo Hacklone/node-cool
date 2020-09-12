@@ -9,13 +9,15 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier",
+    "prettier/@typescript-eslint"
   ],
   "env": {
     "node": true,
     "es6": true
   },
-  "ignorePatterns": ["**/node_modules", "**/dist", "packages/cli/bin", "packages/cli/lib"],
+  "ignorePatterns": ["node_modules", "dist", "src/migrations"],
   "rules": {
     "@typescript-eslint/no-explicit-any": ["error", { "fixToUnknown": true }],
     "@typescript-eslint/explicit-module-boundary-types": ["error"],

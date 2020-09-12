@@ -7,7 +7,7 @@ import { ExampleEntity } from './../../entities/example.entity';
 export class ExampleService {
   constructor(private _databaseConnection: DatabaseConnection) {}
 
-  public async getExampleByIdAsync(exampleId: string): Promise<ExampleEntity> {
+  public async getExampleByIdAsync(exampleId: string): Promise<ExampleEntity | undefined> {
     return await this._databaseConnection.getRepository(ExampleEntity).findOne({
       where: {
         id: exampleId,

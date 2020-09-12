@@ -10,7 +10,7 @@
     "start": "node main.js"
   },
   "dependencies": {
-    "@node-cool/core": "^1.0.0",
+    "@node-cool/core": "^1.0.4",
     "@node-cool/database": "^1.0.0",
     "pg": "7.11.0",
     "reflect-metadata": "^0.1.13"

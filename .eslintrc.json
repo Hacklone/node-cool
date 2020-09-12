@@ -17,7 +17,7 @@
     "node": true,
     "es6": true
   },
-  "ignorePatterns": ["**/node_modules", "**/dist", "packages/cli/bin", "packages/cli/lib"],
+  "ignorePatterns": ["**/node_modules", "**/dist", "packages/cli/bin", "packages/cli/lib", "packages/cli/src/blueprint"],
   "rules": {
     "@typescript-eslint/no-explicit-any": ["error", { "fixToUnknown": true }],
     "@typescript-eslint/explicit-module-boundary-types": ["error"],

@@ -11,3 +11,9 @@ export * from './logger/logger.interface';
 export * from './configuration/middleware.interface';
 export * from './configuration/start-handler.interface';
 export * from './configuration/stop-handler.interface';
+
+export * from './errors/application.error';
+export * from './errors/bad-parameter.error';
+export * from './errors/not-found.error';
+export * from './errors/unauthenticated.error';
+export * from './errors/unauthorized.error';

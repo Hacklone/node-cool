@@ -5,7 +5,7 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strict": true,
-    "strictPropertyInitialization": true,
+    "strictPropertyInitialization": false,
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
@@ -22,5 +22,5 @@
     "outDir": "dist",
     "baseUrl": "."
   },
-  "files": ["./src/main.ts", "src/migrations/**/*.ts"]
+  "include": ["./src/main.ts", "./src/migrations/**/*.ts"]
 }
