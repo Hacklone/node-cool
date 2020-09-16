@@ -1,6 +1,9 @@
-<div style="text-align:center;">
-  <img src="https://hacklone.github.io/node-cool/_media/logo-text.svg">
-</div>
+<p align="center">
+  <a href="https://hacklone.github.io/node-cool">
+    <img width="350" src="https://hacklone.github.io/node-cool/_media/logo-text.svg">
+  </a>
+  <p align="center">The coolest opinionated ready-to-go node framework</p>
+</p>
 
 [![NPM version][npm-image]][npm-url]
 
