@@ -1,6 +1,6 @@
 import { Injectable, JsonController, Get, Param, NotFoundApplicationError } from '@node-cool/core';
 
-import { ExampleDTO } from './../../dto/entity.dto';
+import { ExampleDTO } from './../../dto/example.dto';
 import { ExampleService } from '../services/example.service';
 @Injectable()
 @JsonController('/example')

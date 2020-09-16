@@ -1,4 +1,6 @@
-# @node-cool - The coolest opinionated fully loaded node framework
+<div style="text-align:center;">
+  <img src="https://hacklone.github.io/node-cool/_media/logo-text.svg">
+</div>
 
 [![NPM version][npm-image]][npm-url]
 
@@ -26,7 +28,7 @@
 
 ## Quickstart
 
-[Get started in 5 minutes](https://hacklone.github.io/node-cool/#/getting-started/quick-start)
+[Get started in 5 minutes](https://hacklone.github.io/node-cool/#/getting-started/install)
 
 ## Learn
 

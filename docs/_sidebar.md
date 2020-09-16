@@ -2,4 +2,6 @@
 
 - Getting started
 
-  - [Quick start](/getting-started/quick-start.md)
+  - [Install, Build & Run](/getting-started/install.md)
+  - [Controllers](/getting-started/controllers.md)
+  - [Services](/getting-started/services.md)
