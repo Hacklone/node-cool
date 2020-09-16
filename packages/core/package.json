@@ -5,9 +5,11 @@
   "scripts": {
     "build": "../../node_modules/.bin/tsc --project ./tsconfig.package.json",
     "build-watch": "npm run build -- --watch",
-    "prepublish": "rm -rf ./dist",
-    "postbuild": "cp ./package.json ./dist/package.json && cp ./README.md ./dist/README.md",
-    "test": "../../node_modules/.bin/jasmine"
+    "prepublish": "npm run clean",
+    "prebuild": "npm run clean",
+    "postbuild": "cp ./package.json ../../dist/packages/core/package.json && cp ./README.md ../../dist/packages/core/README.md",
+    "test": "../../node_modules/.bin/jasmine",
+    "clean": "rm -rf ../../dist/packages/core"
   },
   "author": {
     "email": "toakak@gmail.com",

@@ -19,10 +19,10 @@
 - Database ORM
 - Linting
 - Code Formatting
+- Testing pipeline
 
 ### Coming soon
 
-- Testing pipeline
 - Authentication & Session management
 - Google, Facebook authentication
 - Email based authentication

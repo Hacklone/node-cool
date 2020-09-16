@@ -30,6 +30,7 @@
 | IoC Container   | @node-cool/core     | [injection-js](https://www.npmjs.com/package/injection-js)               |
 | node framework  | @node-cool/core     | [Koa.js](https://www.npmjs.com/package/koa)                              |
 | MVC controllers | @node-cool/core     | [routing-controllers](https://www.npmjs.com/package/routing-controllers) |
+| Testing         | @node-cool/core     | [Jasmine](https://www.npmjs.com/package/jasmine)                         |
 | Database ORM    | @node-cool/database | [TypeORM](https://www.npmjs.com/package/typeorm)                         |
 | Code Linting    | @node-cool/cli      | [ESLint](https://www.npmjs.com/package/eslint)                           |
 | Code Formatting | @node-cool/cli      | [Prettier](https://www.npmjs.com/package/prettier)                       |
