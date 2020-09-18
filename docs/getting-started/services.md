@@ -80,3 +80,5 @@ export class ExampleController {
   }
 }
 ```
+
+#### Continue reading: [ Configuration >>](/core/configuration.md) <!-- {docsify-ignore} -->

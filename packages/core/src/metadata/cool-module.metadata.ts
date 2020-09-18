@@ -12,7 +12,11 @@ export interface CoolModuleConfiguration {
   globalMiddlewares?: Provider[];
 
   configuration?: {
+    port?: number;
+
     crossOriginDomains?: string[];
+
+    serverAddress?: string;
   };
 
   startProviders?: Provider[];
@@ -26,3 +30,7 @@ export function CoolModule(configuration: CoolModuleConfiguration): (target: any
     Reflect.defineMetadata(COOL_MODULE_METADATA_KEY, configuration, target);
   };
 }
+
+CoolModule.getConfiguration = (target: Type<unknown>): CoolModuleConfiguration => {
+  return <CoolModuleConfiguration>Reflect.getMetadata(COOL_MODULE_METADATA_KEY, target);
+};

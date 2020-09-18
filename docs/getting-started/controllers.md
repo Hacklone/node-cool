@@ -39,3 +39,7 @@ export class ServerModule {
 
 }
 ```
+
+[Learn more about controllers >>](/core/controllers.md)
+
+#### Continue reading: [ Create services >>](/getting-started/services.md) <!-- {docsify-ignore} -->

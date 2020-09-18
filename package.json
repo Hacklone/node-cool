@@ -4,7 +4,11 @@
   "private": true,
   "description": "Cool - The coolest opinionated fully loaded node framework",
   "scripts": {
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "build-all": "npm run clean && npm run build-core && npm run build-database && npm run build-authentication",
+    "build-core": "pushd ./packages/core && npm run build && popd",
+    "build-database": "pushd ./packages/database && npm run build && popd",
+    "build-authentication": "pushd ./packages/authentication && npm run build && popd"
   },
   "author": {
     "email": "toakak@gmail.com",

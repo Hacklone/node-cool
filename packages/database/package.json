@@ -8,7 +8,6 @@
     "prepublish": "npm run clean",
     "prebuild": "npm run clean",
     "postbuild": "cp ./package.json ../../dist/packages/database/package.json && cp ./README.md ../../dist/packages/database/README.md",
-    "test": "../../node_modules/.bin/jasmine",
     "clean": "rm -rf ../../dist/packages/database"
   },
   "author": {

@@ -2,8 +2,17 @@ import { ReflectiveInjector, Provider } from 'injection-js';
 import { Server } from './server';
 import { CORE_MODULE_PROVIDERS } from './core.module';
 import { Logger } from './logger/logger.interface';
-import { COOL_MODULE_METADATA_KEY, CoolModuleConfiguration } from './metadata/cool-module.metadata';
-import { PROCESS, APPLICATION_MODULE_METADATA } from './injector/internal-injection-tokens';
+import {
+  COOL_MODULE_METADATA_KEY,
+  CoolModuleConfiguration,
+  CoolModule,
+} from './metadata/cool-module.metadata';
+import {
+  PROCESS,
+  APPLICATION_MODULE_METADATA,
+  ApplicationParts,
+  APPLICATION_PARTS,
+} from './injector/internal-injection-tokens';
 import { LOGGER } from './injector/external-injection-tokens';
 
 class Platform {
@@ -20,15 +29,26 @@ class Platform {
       throw new Error('Cannot find CoolModule!');
     }
 
+    const applicationParts: ApplicationParts = {
+      controllers: [],
+      middlewares: [],
+      startHandlers: [],
+      stopHandlers: [],
+    };
+
     const providers = [
       ...CORE_MODULE_PROVIDERS,
       {
         provide: APPLICATION_MODULE_METADATA,
         useValue: applicationModuleMetadata,
       },
+      {
+        provide: APPLICATION_PARTS,
+        useValue: applicationParts,
+      },
     ];
 
-    this._collectProvidersRecursively(applicationModuleMetadata, providers);
+    this._collectProvidersAndApplicationPartsRecursively(applicationModuleMetadata, providers, applicationParts);
 
     const serverModule = ReflectiveInjector.resolveAndCreate(providers);
 
@@ -62,25 +82,34 @@ class Platform {
     }
   }
 
-  private _collectProvidersRecursively(applicationModuleMetadata: CoolModuleConfiguration, providers: Provider[]) {
-    providers.push(...(applicationModuleMetadata.controllers || []));
-    providers.push(...(applicationModuleMetadata.globalMiddlewares || []));
-    providers.push(...(applicationModuleMetadata.providers || []));
-    providers.push(...(applicationModuleMetadata.startProviders || []));
-    providers.push(...(applicationModuleMetadata.stopProviders || []));
+  private _collectProvidersAndApplicationPartsRecursively(
+    moduleMetadata: CoolModuleConfiguration,
+    providers: Provider[],
+    applicationParts: ApplicationParts,
+  ) {
+    providers.push(...(moduleMetadata.controllers || []));
+    providers.push(...(moduleMetadata.globalMiddlewares || []));
+    providers.push(...(moduleMetadata.providers || []));
+    providers.push(...(moduleMetadata.startProviders || []));
+    providers.push(...(moduleMetadata.stopProviders || []));
 
-    if (!applicationModuleMetadata.imports) {
+    applicationParts.controllers.push(...(moduleMetadata.controllers || []));
+    applicationParts.middlewares.push(...(moduleMetadata.globalMiddlewares || []));
+    applicationParts.startHandlers.push(...(moduleMetadata.startProviders || []));
+    applicationParts.stopHandlers.push(...(moduleMetadata.stopProviders || []));
+
+    if (!moduleMetadata.imports) {
       return;
     }
 
-    for (const childModule of applicationModuleMetadata.imports) {
-      const childModuleMetadata = <CoolModuleConfiguration>Reflect.getMetadata(COOL_MODULE_METADATA_KEY, childModule);
+    for (const childModule of moduleMetadata.imports) {
+      const childModuleMetadata = CoolModule.getConfiguration(childModule);
 
       if (!childModuleMetadata) {
         throw new Error('Cannot find CoolModule!');
       }
 
-      this._collectProvidersRecursively(childModuleMetadata, providers);
+      this._collectProvidersAndApplicationPartsRecursively(childModuleMetadata, providers, applicationParts);
     }
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@node-cool/core';
 import { DatabaseConnection } from '@node-cool/database';
 
-import { ExampleEntity } from './../../entities/example.entity';
+import { ExampleEntity } from './../entities/example.entity';
 
 @Injectable()
 export class ExampleService {

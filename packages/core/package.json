@@ -1,6 +1,6 @@
 {
   "name": "@node-cool/core",
-  "version": "1.0.5",
+  "version": "1.0.11",
   "description": "Cool - The coolest opinionated fully loaded node framework",
   "scripts": {
     "build": "../../node_modules/.bin/tsc --project ./tsconfig.package.json",
@@ -8,7 +8,6 @@
     "prepublish": "npm run clean",
     "prebuild": "npm run clean",
     "postbuild": "cp ./package.json ../../dist/packages/core/package.json && cp ./README.md ../../dist/packages/core/README.md",
-    "test": "../../node_modules/.bin/jasmine",
     "clean": "rm -rf ../../dist/packages/core"
   },
   "author": {

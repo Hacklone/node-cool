@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from '@node-cool/database';
-import { ExampleDTO } from '../dto/entity.dto';
+import { ExampleDTO } from './../dto/example.dto';
 
 @Entity()
 export class ExampleEntity {

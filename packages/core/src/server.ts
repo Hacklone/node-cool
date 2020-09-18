@@ -1,10 +1,9 @@
 import { StartHandler } from './configuration/start-handler.interface';
-import { CoolModuleConfiguration } from './metadata/cool-module.metadata';
 import { Configuration } from './configuration/configuration';
 import { Injectable, Injector, Inject, Provider } from 'injection-js';
 import { Logger } from './logger/logger.interface';
 import { useContainer, useKoaServer } from 'routing-controllers';
-import { APPLICATION_MODULE_METADATA } from './injector/internal-injection-tokens';
+import { ApplicationParts, APPLICATION_PARTS } from './injector/internal-injection-tokens';
 import * as Koa from 'koa';
 import * as koaCors from '@koa/cors';
 import * as http from 'http';
@@ -15,10 +14,9 @@ import { StopHandler } from './configuration/stop-handler.interface';
 export class Server {
   constructor(
     @Inject(LOGGER) private _logger: Logger,
-    @Inject(APPLICATION_MODULE_METADATA)
-    private _applicationMetadata: CoolModuleConfiguration,
     @Inject(ERROR_HANDLER_FACTORY) private _errorHandlerFactory: () => Provider,
     private _configuration: Configuration,
+    @Inject(APPLICATION_PARTS) private _applicationParts: ApplicationParts,
     private _serverModule: Injector,
   ) {}
 
@@ -56,13 +54,13 @@ export class Server {
   }
 
   private async _invokeStartProvidersAsync(app: Koa<Koa.DefaultState, Koa.DefaultContext>) {
-    if (!this._applicationMetadata.startProviders) {
+    if (!this._applicationParts.startHandlers || !this._applicationParts.startHandlers.length) {
       return;
     }
 
     this._logger.verbose('Invoking start providers');
 
-    for (const provider of this._applicationMetadata.startProviders) {
+    for (const provider of this._applicationParts.startHandlers) {
       const providerInstance = <StartHandler>this._serverModule.get(provider);
 
       if (!providerInstance.onStartAsync) {
@@ -74,13 +72,13 @@ export class Server {
   }
 
   private async _invokeStopProvidersAsync() {
-    if (!this._applicationMetadata.stopProviders) {
+    if (!this._applicationParts.stopHandlers || !this._applicationParts.stopHandlers.length) {
       return;
     }
 
     this._logger.verbose('Invoking stop providers');
 
-    for (const provider of this._applicationMetadata.stopProviders) {
+    for (const provider of this._applicationParts.stopHandlers) {
       const providerInstance = <StopHandler>this._serverModule.get(provider);
 
       if (!providerInstance.onStopAsync) {
@@ -92,24 +90,15 @@ export class Server {
   }
 
   private _configureServer(app: Koa<Koa.DefaultState, Koa.DefaultContext>) {
-    let controllers: Provider[] = [];
-
-    if (this._applicationMetadata.controllers) {
-      controllers = controllers.concat(this._applicationMetadata.controllers);
-    }
-
-    let middlewares: Provider[] = [this._errorHandlerFactory()];
-
-    if (this._applicationMetadata.globalMiddlewares) {
-      middlewares = middlewares.concat(this._applicationMetadata.globalMiddlewares);
-    }
+    // Add global error handlers
+    this._applicationParts.middlewares.unshift(this._errorHandlerFactory());
 
     app = useKoaServer(app, {
       routePrefix: '/api',
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      controllers: <any[]>controllers,
+      controllers: <any[]>this._applicationParts.controllers,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      middlewares: <any[]>middlewares,
+      middlewares: <any[]>this._applicationParts.middlewares,
       defaultErrorHandler: false,
     });
 

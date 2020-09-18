@@ -10,10 +10,16 @@ export class Configuration {
     private _applicationModuleMetadata: CoolModuleConfiguration,
   ) {}
 
-  public port: number = (this._process.env.PORT && +this._process.env.PORT) || 2000;
+  public port: number = (this._process.env.PORT && +this._process.env.PORT) || this._applicationModuleMetadata.configuration?.port || 2000;
+
+  public serverAddress: string | undefined = this._process.env.SERVER_ADDRESS || this._applicationModuleMetadata.configuration?.serverAddress;
 
   public crossOrigin = {
     enabled: !!this._applicationModuleMetadata.configuration?.crossOriginDomains,
-    domains: this._applicationModuleMetadata.configuration?.crossOriginDomains || [],
+    domains: this._process.env.CROSS_ORIGIN_DOMAINS ? this._process.env.CROSS_ORIGIN_DOMAINS.split(',') : (this._applicationModuleMetadata.configuration?.crossOriginDomains || []),
   };
+
+  public getConfigurationByKey(key: string): string | undefined {
+    return this._process.env[key];
+  }
 }

@@ -34,3 +34,17 @@ You can run your server with the following command.
 $ cd dist
 $ npm start
 ```
+
+## Continously build server
+
+```bash
+$ npm run build-watch
+```
+
+## Continously serve server
+
+```bash
+$ npm run start-watch
+```
+
+#### Continue reading: [ Create controllers >>](/getting-started/controllers.md) <!-- {docsify-ignore} -->
