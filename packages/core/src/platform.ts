@@ -34,6 +34,7 @@ class Platform {
       middlewares: [],
       startHandlers: [],
       stopHandlers: [],
+      beforeListenHandlers: [],
     };
 
     const providers = [
@@ -92,11 +93,13 @@ class Platform {
     providers.push(...(moduleMetadata.providers || []));
     providers.push(...(moduleMetadata.startProviders || []));
     providers.push(...(moduleMetadata.stopProviders || []));
+    providers.push(...(moduleMetadata.beforeListenProviders || []));
 
     applicationParts.controllers.push(...(moduleMetadata.controllers || []));
     applicationParts.middlewares.push(...(moduleMetadata.globalMiddlewares || []));
     applicationParts.startHandlers.push(...(moduleMetadata.startProviders || []));
     applicationParts.stopHandlers.push(...(moduleMetadata.stopProviders || []));
+    applicationParts.beforeListenHandlers.push(...(moduleMetadata.beforeListenProviders || []));
 
     if (!moduleMetadata.imports) {
       return;

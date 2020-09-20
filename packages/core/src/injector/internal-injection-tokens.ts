@@ -10,4 +10,5 @@ export interface ApplicationParts {
   middlewares: Provider[];
   startHandlers: Provider[];
   stopHandlers: Provider[];
+  beforeListenHandlers: Provider[];
 }

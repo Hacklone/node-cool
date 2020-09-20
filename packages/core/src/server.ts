@@ -1,3 +1,4 @@
+import { BeforeListenHandler } from './configuration/before-listen-handler.interface';
 import { StartHandler } from './configuration/start-handler.interface';
 import { Configuration } from './configuration/configuration';
 import { Injectable, Injector, Inject, Provider } from 'injection-js';
@@ -33,7 +34,7 @@ export class Server {
 
     app = this._configureServer(app);
 
-    this._startListening(app);
+    await this._startListeningAsync(app);
 
     this._logger.verbose(`Server started`);
   }
@@ -46,11 +47,33 @@ export class Server {
     this._logger.verbose('Server stopped');
   }
 
-  private _startListening(app: Koa<Koa.DefaultState, Koa.DefaultContext>) {
+  private async _startListeningAsync(app: Koa<Koa.DefaultState, Koa.DefaultContext>) {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    http.createServer(app.callback()).listen(this._configuration.port);
+    const server = http.createServer(app.callback());
+
+    await this._invokeBeforeListenProvidersAsync(server);
+    
+    server.listen(this._configuration.port);
 
     this._logger.verbose(`Listening started on port: ${this._configuration.port}`);
+  }
+
+  private async _invokeBeforeListenProvidersAsync(server: http.Server) {
+    if (!this._applicationParts.beforeListenHandlers || !this._applicationParts.beforeListenHandlers.length) {
+      return;
+    }
+
+    this._logger.verbose('Invoking before listen providers');
+
+    for (const provider of this._applicationParts.beforeListenHandlers) {
+      const providerInstance = <BeforeListenHandler>this._serverModule.get(provider);
+
+      if (!providerInstance.onBeforeListenAsync) {
+        throw new Error('No onBeforeListenAsync() function found');
+      }
+
+      await providerInstance.onBeforeListenAsync(server);
+    }
   }
 
   private async _invokeStartProvidersAsync(app: Koa<Koa.DefaultState, Koa.DefaultContext>) {

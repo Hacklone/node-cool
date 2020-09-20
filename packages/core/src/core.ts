@@ -14,6 +14,7 @@ export * from './configuration/configuration';
 export * from './configuration/middleware.interface';
 export * from './configuration/start-handler.interface';
 export * from './configuration/stop-handler.interface';
+export * from './configuration/before-listen-handler.interface';
 
 export * from './errors/application.error';
 export * from './errors/bad-parameter.error';

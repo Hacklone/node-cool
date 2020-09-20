@@ -22,6 +22,8 @@ export interface CoolModuleConfiguration {
   startProviders?: Provider[];
 
   stopProviders?: Provider[];
+
+  beforeListenProviders?: Provider[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
