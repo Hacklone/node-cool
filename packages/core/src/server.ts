@@ -1,15 +1,18 @@
+import { XSRFTokenController } from './controllers/xsrf-token.controller';
+import { XSRFTokenValidatorMiddleware } from './middlewares/xsrf-validator.middleware';
 import { BeforeListenHandler } from './configuration/before-listen-handler.interface';
 import { StartHandler } from './configuration/start-handler.interface';
 import { Configuration } from './configuration/configuration';
 import { Injectable, Injector, Inject, Provider } from 'injection-js';
 import { Logger } from './logger/logger.interface';
 import { useContainer, useKoaServer } from 'routing-controllers';
-import { ApplicationParts, APPLICATION_PARTS } from './injector/internal-injection-tokens';
+import { ApplicationParts, APPLICATION_PARTS, APPLICATION_MODULE_METADATA } from './injector/internal-injection-tokens';
 import * as Koa from 'koa';
 import * as koaCors from '@koa/cors';
 import * as http from 'http';
 import { LOGGER, ERROR_HANDLER_FACTORY } from './injector/external-injection-tokens';
 import { StopHandler } from './configuration/stop-handler.interface';
+import { CoolModuleConfiguration } from './metadata/cool-module.metadata';
 
 @Injectable()
 export class Server {
@@ -17,6 +20,7 @@ export class Server {
     @Inject(LOGGER) private _logger: Logger,
     @Inject(ERROR_HANDLER_FACTORY) private _errorHandlerFactory: () => Provider,
     private _configuration: Configuration,
+    @Inject(APPLICATION_MODULE_METADATA) private _applicationMetadata: CoolModuleConfiguration,
     @Inject(APPLICATION_PARTS) private _applicationParts: ApplicationParts,
     private _serverModule: Injector,
   ) {}
@@ -52,7 +56,7 @@ export class Server {
     const server = http.createServer(app.callback());
 
     await this._invokeBeforeListenProvidersAsync(server);
-    
+
     server.listen(this._configuration.port);
 
     this._logger.verbose(`Listening started on port: ${this._configuration.port}`);
@@ -113,8 +117,27 @@ export class Server {
   }
 
   private _configureServer(app: Koa<Koa.DefaultState, Koa.DefaultContext>) {
-    // Add global error handlers
-    this._applicationParts.middlewares.unshift(this._errorHandlerFactory());
+    const builtInGlobalMiddlewares = [];
+
+    builtInGlobalMiddlewares.push(this._errorHandlerFactory());
+
+    if (!this._applicationMetadata.xsrfValidation?.disabled) {
+      builtInGlobalMiddlewares.push(XSRFTokenValidatorMiddleware);
+    }
+
+    if (builtInGlobalMiddlewares.length) {
+      this._applicationParts.middlewares.unshift(...builtInGlobalMiddlewares);
+    }
+
+    const builtInControllers = [];
+
+    if (!this._applicationMetadata.xsrfValidation?.disabled) {
+      builtInControllers.push(XSRFTokenController);
+    }
+
+    if (builtInControllers.length) {
+      this._applicationParts.controllers.unshift(...builtInControllers);
+    }
 
     app = useKoaServer(app, {
       routePrefix: '/api',

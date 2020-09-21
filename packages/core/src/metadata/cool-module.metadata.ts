@@ -11,6 +11,12 @@ export interface CoolModuleConfiguration {
 
   globalMiddlewares?: Provider[];
 
+  xsrfValidation?: {
+    disabled?: boolean;
+
+    excludeRoutes?: RegExp[];
+  };
+
   configuration?: {
     port?: number;
 

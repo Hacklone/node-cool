@@ -15,6 +15,7 @@
 - Code formatting
 - Authentication & Session management
 - Google, Facebook authentication
+- XSRF Token validation
 
 ### Coming soon
 

@@ -3,9 +3,9 @@ import * as crypto from 'crypto';
 
 @Injectable()
 export class CryptoUtils {
-  public async getCryptoRandomStringAsync(): Promise<string> {
+  public async getCryptoRandomStringAsync(length = 256): Promise<string> {
     return new Promise((resolve, reject) => {
-      crypto.randomBytes(256, (err, buf) => {
+      crypto.randomBytes(length, (err, buf) => {
         if (err) {
           reject(err);
 

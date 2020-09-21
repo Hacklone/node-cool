@@ -14,6 +14,7 @@ import { ServerStartHandler } from './start-handler';
 export * from './configuration/authentication-configuration.interface';
 export * from './authentication/authentication-type.enum';
 export * from './authentication/user-session.interface';
+export * from './authentication/application-state.interface';
 export * from './authentication/authentication-persistence.provider';
 
 @CoolModule({

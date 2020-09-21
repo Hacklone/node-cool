@@ -1,3 +1,4 @@
+import { XSRFTokenValidatorMiddleware } from './middlewares/xsrf-validator.middleware';
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { ErrorHandlerMiddleware } from './middlewares/error-handler.middleware';
 import { BasicLogger } from './logger/basic-logger';
@@ -14,6 +15,7 @@ export const CORE_MODULE_PROVIDERS: Provider[] = [
   Configuration,
 
   ErrorHandlerMiddleware,
+  XSRFTokenValidatorMiddleware,
 
   DateProvider,
   CryptoUtils,
