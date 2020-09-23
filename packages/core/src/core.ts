@@ -5,7 +5,7 @@ export * from 'routing-controllers';
 
 export * from './platform';
 
-export { Context } from 'koa';
+export { Context, ParameterizedContext } from 'koa';
 
 export * from './injector/external-injection-tokens';
 export * from './metadata/cool-module.metadata';

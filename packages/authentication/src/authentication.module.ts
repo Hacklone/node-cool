@@ -10,6 +10,7 @@ import { FacebookAuthenticationController } from './controllers/facebook-authent
 import { AUTHENTICATION_CONFIGURATION, AUTHENTICATION_PERSISTENCE_PROVIDER } from './injection-tokens';
 
 import { ServerStartHandler } from './start-handler';
+import { LoggedInValidatorMiddleware } from './middlewares/logged-in-validator.middleware';
 
 export * from './configuration/authentication-configuration.interface';
 export * from './authentication/authentication-type.enum';
@@ -19,6 +20,9 @@ export * from './authentication/authentication-persistence.provider';
 
 @CoolModule({
   providers: [GoogleAuthenticationStrategyFactory, FacebookAuthenticationStrategyFactory],
+  globalMiddlewares: [
+    LoggedInValidatorMiddleware,
+  ],
   startProviders: [ServerStartHandler],
 })
 export class AuthenticationModule {

@@ -21,4 +21,6 @@ export interface AuthenticationConfiguration {
   logoutRedirectUrl?: string;
 
   disableAutomaticRegistration?: boolean;
+
+  disableSessionValidationForRoutes?: RegExp[];
 }
