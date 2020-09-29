@@ -170,6 +170,8 @@ export class Server {
 
           return this._configuration.crossOrigin.domains[0];
         },
+        credentials: true,
+        maxAge: 120,
       }),
     );
   }

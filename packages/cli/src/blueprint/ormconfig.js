@@ -8,8 +8,8 @@ module.exports = {
   ssl: true,
   synchronize: false,
   maxQueryExecutionTime: 1000,
-  entities: [`${__dirname}/src/entities/**/*.js`],
-  migrations: [`${__dirname}/src/migrations/**/*.js`],
+  entities: [`${__dirname}/entities/**/*.js`, `${__dirname}/dist/entities/**/*.js`],
+  migrations: [`${__dirname}/migrations/**/*.js`, `${__dirname}/dist/migrations/**/*.js`],
   cli: {
     migrationsDir: `src/migrations`,
   },

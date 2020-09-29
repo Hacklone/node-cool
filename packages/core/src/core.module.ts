@@ -9,6 +9,7 @@ import { Configuration } from './configuration/configuration';
 import { PROCESS } from './injector/internal-injection-tokens';
 import { DateProvider } from './utils/date.provider';
 import { ERROR_HANDLER_FACTORY, LOGGER } from './injector/external-injection-tokens';
+import { XSRFTokenController } from './controllers/xsrf-token.controller';
 
 export const CORE_MODULE_PROVIDERS: Provider[] = [
   Server,
@@ -16,6 +17,7 @@ export const CORE_MODULE_PROVIDERS: Provider[] = [
 
   ErrorHandlerMiddleware,
   XSRFTokenValidatorMiddleware,
+  XSRFTokenController,
 
   DateProvider,
   CryptoUtils,

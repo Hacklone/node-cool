@@ -20,7 +20,11 @@ export interface CoolModuleConfiguration {
   configuration?: {
     port?: number;
 
-    crossOriginDomains?: string[];
+    crossOriginDomains?: {
+      enabled?: boolean;
+
+      domains?: string[];
+    },
 
     serverAddress?: string;
   };

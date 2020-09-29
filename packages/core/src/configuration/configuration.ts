@@ -15,8 +15,8 @@ export class Configuration {
   public serverAddress: string | undefined = this._process.env.SERVER_ADDRESS || this._applicationModuleMetadata.configuration?.serverAddress;
 
   public crossOrigin = {
-    enabled: !!this._applicationModuleMetadata.configuration?.crossOriginDomains,
-    domains: this._process.env.CROSS_ORIGIN_DOMAINS ? this._process.env.CROSS_ORIGIN_DOMAINS.split(',') : (this._applicationModuleMetadata.configuration?.crossOriginDomains || []),
+    enabled: this._applicationModuleMetadata.configuration?.crossOriginDomains?.enabled,
+    domains: this._process.env.CROSS_ORIGIN_DOMAINS ? this._process.env.CROSS_ORIGIN_DOMAINS.split(',') : (this._applicationModuleMetadata.configuration?.crossOriginDomains?.domains || []),
   };
 
   public getConfigurationByKey(key: string): string | undefined {

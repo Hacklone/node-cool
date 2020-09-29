@@ -21,7 +21,7 @@ $ npm install -g @node-cool/cli
 $ node-cool COMMAND
 running command...
 $ node-cool (-v|--version|version)
-@node-cool/cli/1.1.7 darwin-x64 node-v12.13.1
+@node-cool/cli/1.1.8 darwin-x64 node-v12.13.1
 $ node-cool --help [COMMAND]
 USAGE
   $ node-cool COMMAND
@@ -69,5 +69,5 @@ EXAMPLE
   $ node-cool new --name my-project
 ```
 
-_See code: [src/commands/new.ts](https://github.com/Hacklone/node-cool/blob/v1.1.7/src/commands/new.ts)_
+_See code: [src/commands/new.ts](https://github.com/Hacklone/node-cool/blob/v1.1.8/src/commands/new.ts)_
 <!-- commandsstop -->
