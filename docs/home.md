@@ -1,4 +1,8 @@
-# @node-cool <!-- {docsify-ignore-all} -->
+<div style="text-align: center">
+  <img style="height: 300px" src="_media/logo-text.svg">
+
+  <div>The coolest opinionated ready-to-go node framework</div>
+</div>
 
 [![NPM version][npm-image]][npm-url]
 
