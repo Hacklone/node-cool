@@ -11,6 +11,7 @@ import { ApplicationParts, APPLICATION_PARTS, APPLICATION_MODULE_METADATA } from
 import * as Koa from 'koa';
 import * as koaCors from '@koa/cors';
 import * as http from 'http';
+import * as https from 'https';
 import { LOGGER, ERROR_HANDLER_FACTORY } from './injector/external-injection-tokens';
 import { StopHandler } from './configuration/stop-handler.interface';
 import { CoolModuleConfiguration } from './metadata/cool-module.metadata';
@@ -53,8 +54,21 @@ export class Server {
   }
 
   private async _startListeningAsync(app: Koa<Koa.DefaultState, Koa.DefaultContext>) {
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    const server = http.createServer(app.callback());
+    let server: http.Server;
+
+    if (this._applicationMetadata.configuration?.ssl?.enabled) {
+      server = https.createServer(
+        {
+          key: this._applicationMetadata.configuration.ssl.key,
+          cert: this._applicationMetadata.configuration.ssl.cert,
+        },
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        app.callback(),
+      );
+    } else {
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
+      server = http.createServer(app.callback());
+    }
 
     await this._invokeBeforeListenProvidersAsync(server);
 

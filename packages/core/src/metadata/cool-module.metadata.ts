@@ -14,6 +14,14 @@ export interface CoolModuleConfiguration {
   configuration?: {
     port?: number;
 
+    ssl?: {
+      enabled: boolean;
+
+      key: string;
+
+      cert: string;
+    },
+
     crossOriginDomains?: {
       enabled?: boolean;
 

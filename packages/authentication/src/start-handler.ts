@@ -84,7 +84,9 @@ export class ServerStartHandler implements StartHandler {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     app.keys = [sessionSecret];
 
-    this._registerMiddleware(app, koaSession({}, app));
+    this._registerMiddleware(app, koaSession({
+      sameSite: 'none',
+    }, app));
   }
 
   private _registerMiddleware(app: ServerApplication, middleware: unknown) {
