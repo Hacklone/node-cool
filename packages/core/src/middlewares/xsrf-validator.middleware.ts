@@ -1,21 +1,18 @@
-import { Inject, Injectable } from 'injection-js';
+import { Injectable } from 'injection-js';
 import { ParameterizedContext } from 'koa';
 import { KoaMiddlewareInterface, Middleware } from 'routing-controllers';
+import { Configuration } from '../configuration/configuration';
 import { UnauthorizedApplicationError } from '../errors/unauthorized.error';
-import { APPLICATION_MODULE_METADATA } from '../injector/internal-injection-tokens';
-import { CoolModuleConfiguration } from '../metadata/cool-module.metadata';
 
 @Injectable()
 @Middleware({ type: 'before' })
 export class XSRFTokenValidatorMiddleware implements KoaMiddlewareInterface {
   private _excludedRoutes: RegExp[] = [];
 
-  constructor(@Inject(APPLICATION_MODULE_METADATA) private _applicationMetadata: CoolModuleConfiguration) {
+  constructor(private _configuration: Configuration) {
     this._excludedRoutes.push(/^\/api\/settings\/xsrf-token$/);
 
-    if (this._applicationMetadata.xsrfValidation?.excludeRoutes?.length) {
-      this._excludedRoutes.push(...this._applicationMetadata.xsrfValidation.excludeRoutes);
-    }
+    this._excludedRoutes.push(...this._configuration.xsrfExcludeRoutes);
   }
 
   public async use(context: ParameterizedContext, next: (err?: Error) => Promise<unknown>): Promise<void> {

@@ -12,8 +12,7 @@ export class LoggedInValidatorMiddleware implements KoaMiddlewareInterface {
     this._disabledRoutes.push(...[
       /^\/api\/settings\/xsrf-token$/,
       /^\/api\/authentication\/logout$/,
-      /^\/api\/authentication\/(facebook|google)$/,
-      /^\/api\/authentication\/(facebook|google)\/callback\?.*/,
+      /^\/api\/authentication\/(facebook|google)(\/callback(\?.*)?)?$/,
     ]);
 
     if (this._authenticationConfiguration.disableSessionValidationForRoutes?.length) {

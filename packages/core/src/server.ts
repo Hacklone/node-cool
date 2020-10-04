@@ -1,3 +1,4 @@
+import { SecureCookieMiddleware } from './middlewares/secure-cookie.middleware';
 import { XSRFTokenController } from './controllers/xsrf-token.controller';
 import { XSRFTokenValidatorMiddleware } from './middlewares/xsrf-validator.middleware';
 import { BeforeListenHandler } from './configuration/before-listen-handler.interface';
@@ -119,9 +120,9 @@ export class Server {
   private _configureServer(app: Koa<Koa.DefaultState, Koa.DefaultContext>) {
     const builtInGlobalMiddlewares = [];
 
-    builtInGlobalMiddlewares.push(this._errorHandlerFactory());
+    builtInGlobalMiddlewares.push(this._errorHandlerFactory(), SecureCookieMiddleware);
 
-    if (!this._applicationMetadata.xsrfValidation?.disabled) {
+    if (!this._applicationMetadata.configuration?.xsrfValidation?.disabled) {
       builtInGlobalMiddlewares.push(XSRFTokenValidatorMiddleware);
     }
 
@@ -131,7 +132,7 @@ export class Server {
 
     const builtInControllers = [];
 
-    if (!this._applicationMetadata.xsrfValidation?.disabled) {
+    if (!this._applicationMetadata.configuration?.xsrfValidation?.disabled) {
       builtInControllers.push(XSRFTokenController);
     }
 

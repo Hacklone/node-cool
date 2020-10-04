@@ -17,11 +17,23 @@ export class ServerStartHandler implements StartHandler {
   ) {}
 
   public onStartAsync(app: ServerApplication): Promise<void> {
+    this._addXSRFExceptions();
+
     this._addSessionMiddleware(app);
 
     this._addPassportMiddleware(app);
 
     return Promise.resolve();
+  }
+
+  private _addXSRFExceptions() {
+    if (this._authenticationConfiguration.google?.enabled) {
+      this._configuration.xsrfExcludeRoutes.push(/^\/api\/authentication\/google(\/callback(\?.*)?)?$/);
+    }
+
+    if (this._authenticationConfiguration.facebook?.enabled) {
+      this._configuration.xsrfExcludeRoutes.push(/^\/api\/authentication\/facebook(\/callback(\?.*)?)?$/);
+    }
   }
 
   private _addPassportMiddleware(app: ServerApplication) {
@@ -62,7 +74,8 @@ export class ServerStartHandler implements StartHandler {
   private _addSessionMiddleware(app: ServerApplication) {
     this._logger.verbose('Adding Session middleware');
 
-    const sessionSecret = this._configuration.getConfigurationByKey('SESSION_SECRET') || this._authenticationConfiguration.sessionSecret;
+    const sessionSecret =
+      this._configuration.getConfigurationByKey('SESSION_SECRET') || this._authenticationConfiguration.sessionSecret;
 
     if (!sessionSecret) {
       throw new Error('No session secret set!');
@@ -71,15 +84,7 @@ export class ServerStartHandler implements StartHandler {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     app.keys = [sessionSecret];
 
-    this._registerMiddleware(app, 
-      koaSession(
-        {
-          secure: true,
-          sameSite: 'none',
-        },
-        app,
-      ),
-    );
+    this._registerMiddleware(app, koaSession({}, app));
   }
 
   private _registerMiddleware(app: ServerApplication, middleware: unknown) {

@@ -29,19 +29,32 @@ export abstract class AuthenticationStrategyFactoryBase<Profile> {
       const authenticationId = await this._getAuthenticationIdAsync(profile);
 
       if (!authenticationId) {
+        throw new UnauthenticatedApplicationError();
+      }
+
+      let user = await this._authenticationPersistenceProvider.getUserByAuthenticationIdAsync(
+        this._authenticationType,
+        authenticationId,
+      );
+
+      if (!user) {
         if (!this._authenticationConfiguration.disableAutomaticRegistration) {
           const userData = await this._getProfileDataAsync(profile);
 
-          await this._authenticationPersistenceProvider.registerUserAsync(authenticationId, this._authenticationType, userData);
+          await this._authenticationPersistenceProvider.registerUserAsync(
+            authenticationId,
+            this._authenticationType,
+            userData,
+          );
+
+          user = await this._authenticationPersistenceProvider.getUserByAuthenticationIdAsync(
+            this._authenticationType,
+            authenticationId,
+          );
         } else {
           throw new UnauthenticatedApplicationError();
         }
       }
-
-      const user = await this._authenticationPersistenceProvider.getUserByAuthenticationIdAsync(
-        this._authenticationType,
-        authenticationId,
-      );
 
       if (!user) {
         throw new UnauthenticatedApplicationError();

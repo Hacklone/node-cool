@@ -19,6 +19,10 @@ export class Configuration {
     domains: this._process.env.CROSS_ORIGIN_DOMAINS ? this._process.env.CROSS_ORIGIN_DOMAINS.split(',') : (this._applicationModuleMetadata.configuration?.crossOriginDomains?.domains || []),
   };
 
+  public xsrfExcludeRoutes: RegExp[] = this._applicationModuleMetadata.configuration?.xsrfValidation?.excludeRoutes || [];
+
+  public disableSecureCookies = this._applicationModuleMetadata.configuration?.disableSecureCookies;
+
   public getConfigurationByKey(key: string): string | undefined {
     return this._process.env[key];
   }
